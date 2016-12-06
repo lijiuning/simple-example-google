@@ -59,14 +59,16 @@ public class Utils {
             resultString = sb.toString();
 
             int counter = 0;
-            isRandomStringValid = 1;            //we consider that the string is valid by default
+            //we consider that the string is valid by default
+            isRandomStringValid = 1;
             for (int i = 0; i < resultString.length(); i++) {
                 if (resultString.charAt(i) == ' ') {
                     counter++;
                 }
             }
             if (resultString.length() == counter) {
-                isRandomStringValid = 0;        //but if the generated string contains only spaces then regenerate it
+                //but if the generated string contains only spaces then regenerate it
+                isRandomStringValid = 0;
             }
         } while (isRandomStringValid < 1);
         return resultString.trim();

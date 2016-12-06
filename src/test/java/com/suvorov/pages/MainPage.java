@@ -37,7 +37,7 @@ public class MainPage {
     }
 
     public InboxPage clickInboxFolder(WebDriver driver) {
-        Utils.clickElement(driver, By.partialLinkText("Inbox"));
+        Utils.clickElement(driver, By.xpath("//div[@role='navigation']/div/div/div/div/div")); //a[contains(@title,'Inbox')]"));
         return PageFactory.initElements(driver, InboxPage.class);
     }
 
