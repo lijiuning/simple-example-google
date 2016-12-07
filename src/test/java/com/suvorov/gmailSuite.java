@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by vsuvorov on 12/5/16.
  */
-public class gmailTest {
+public class gmailSuite {
 
     WebDriver driver;
 

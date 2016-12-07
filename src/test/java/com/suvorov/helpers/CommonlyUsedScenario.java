@@ -1,5 +1,6 @@
 package com.suvorov.helpers;
 
+import com.suvorov.pages.GoogleInitPage;
 import com.suvorov.pages.LoginPage;
 import com.suvorov.pages.MainPage;
 import org.openqa.selenium.WebDriver;
@@ -17,5 +18,10 @@ public class CommonlyUsedScenario {
         loginPage.clickNextBtn(driver);
         loginPage.typeUserPass(driver, "vsautotesting123");
         return loginPage.clickSignInBtn(driver);
+    }
+
+    public static GoogleInitPage openGoogle(WebDriver driver) {
+        driver.get("http://google.com");
+        return PageFactory.initElements(driver, GoogleInitPage.class);
     }
 }

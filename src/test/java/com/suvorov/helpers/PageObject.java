@@ -77,7 +77,7 @@ public class PageObject {
         return driver.findElements(by).size() > 0;
     }
 
-    public String getElementValue(WebDriver driver, By by) {
+    public String getElementText(WebDriver driver, By by) {
         waitUntilVisible(driver, by);
         return driver.findElement(by).getText();
     }
