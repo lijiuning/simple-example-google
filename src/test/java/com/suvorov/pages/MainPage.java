@@ -4,12 +4,15 @@ import com.suvorov.helpers.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by vsuvorov on 12/5/16.
  */
 public class MainPage extends PageObject {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(MainPage.class);
 
     public boolean isUserLoggedIn(WebDriver driver) {
         return isElementVisible(driver, By.cssSelector("div[role='button'][gh='cm']"));
@@ -38,12 +41,13 @@ public class MainPage extends PageObject {
     public int getMailsQty(WebDriver driver) {
         int qty;
         By by = By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]");
-        if (isElementPresent(driver, by)) {
+        try {
             waitForRefresh(driver, by);
             qty = Integer.parseInt(driver.findElement(By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]")).getText());
-        } else {
+        } catch (Exception e) {
             qty = 0;
         }
+        LOGGER.info("Quantity of messages - " + qty);
         return qty;
     }
 }
