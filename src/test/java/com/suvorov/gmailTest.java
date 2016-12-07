@@ -2,7 +2,7 @@ package com.suvorov;
 
 import com.suvorov.categories.HighPriority;
 import com.suvorov.categories.MediumPriority;
-import com.suvorov.helpers.Utils;
+import com.suvorov.helpers.CommonlyUsedScenario;
 import com.suvorov.pages.*;
 import org.junit.After;
 import org.junit.Assert;
@@ -11,8 +11,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by vsuvorov on 12/5/16.
@@ -36,7 +34,7 @@ public class gmailTest {
     @Category({HighPriority.class})
     @Test
     public void gmailLogin() {
-        MainPage mainPage = loginToGmail();
+        MainPage mainPage = CommonlyUsedScenario.loginToGmail(driver);
         Assert.assertTrue("User should be logged in now", mainPage.isUserLoggedIn(driver));
     }
 
@@ -45,7 +43,7 @@ public class gmailTest {
     public void sendEmail() {
 
         //login and check quantity of mails in box
-        MainPage mainPage = loginToGmail();
+        MainPage mainPage = CommonlyUsedScenario.loginToGmail(driver);
         int mailsQty = mainPage.getMailsQty(driver);
 
         //compose and send a new message
@@ -65,8 +63,8 @@ public class gmailTest {
 
         //check the details of new message
         EmailDetailsPage emailDetailsPage = inboxPage.clickTopNewMail(driver);
-        String actualSubj=emailDetailsPage.getEmailActualSubject(driver);
-        String actualBody=emailDetailsPage.getEmailActualBody(driver);
+        String actualSubj = emailDetailsPage.getEmailActualSubject(driver);
+        String actualBody = emailDetailsPage.getEmailActualBody(driver);
         Assert.assertEquals("Email should have a subject typed before", expectedSubj, actualSubj);
         Assert.assertEquals("Email should have a body message typed before", expectedBody, actualBody);
     }
@@ -74,18 +72,10 @@ public class gmailTest {
     @Category({MediumPriority.class})
     @Test
     public void gmailLogout() {
-        MainPage mainPage = loginToGmail();
+        MainPage mainPage = CommonlyUsedScenario.loginToGmail(driver);
         mainPage.clickProfileBtn(driver);
         LoginPage loginPage = mainPage.clickLogOutBtn(driver);
         Assert.assertTrue("User should be NOT logged in", loginPage.isUserLoggedout(driver));
-    }
-
-    private MainPage loginToGmail() {
-        LoginPage loginPage = Utils.openGmailPage(driver);
-        loginPage.typeUserName(driver, "vsautotesting@gmail.com");
-        loginPage.clickNextBtn(driver);
-        loginPage.typeUserPass(driver, "vsautotesting123");
-        return loginPage.clickSignInBtn(driver);
     }
 
     @After

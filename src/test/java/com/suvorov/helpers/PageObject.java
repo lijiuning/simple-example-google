@@ -1,33 +1,25 @@
 package com.suvorov.helpers;
 
-import com.suvorov.pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
 
 /**
- * Created by vsuvorov on 12/5/16.
+ * Created by vsuvorov on 12/6/16.
  */
-public class Utils {
+public class PageObject {
+    private final int TIME_OUT_IN_SECONDS = 15;
 
-    public static final int TIME_OUT_IN_SECONDS = 15;
-
-    public static LoginPage openGmailPage(WebDriver driver) {
-        driver.get("http://gmail.com");
-        return PageFactory.initElements(driver, LoginPage.class);
-    }
-
-    public static void waitUntilVisible(WebDriver driver, By by) {
+    public void waitUntilVisible(WebDriver driver, By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
-    public static String setTextBoxValue(WebDriver driver, By by, String s) {
+    public String setTextBoxValue(WebDriver driver, By by, String s) {
         waitUntilVisible(driver, by);
         WebElement e = driver.findElement(by);
 //        e.clear();
@@ -35,7 +27,7 @@ public class Utils {
         return s;
     }
 
-    public static String setRandomTextBoxValue(WebDriver driver, By by, int maxStringLength) {
+    public String setRandomTextBoxValue(WebDriver driver, By by, int maxStringLength) {
         waitUntilVisible(driver, by);
         WebElement e = driver.findElement(by);
         String typedString = randomString(maxStringLength);
@@ -43,7 +35,7 @@ public class Utils {
         return typedString;
     }
 
-    private static String randomString(int maxStringLength) {
+    private String randomString(int maxStringLength) {
         char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !№;%:?*()_=+/*-.,`".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -74,23 +66,23 @@ public class Utils {
         return resultString.trim();
     }
 
-    public static void clickElement(WebDriver driver, By by) {
+    public void clickElement(WebDriver driver, By by) {
         waitUntilVisible(driver, by);
         WebElement e = driver.findElement(by);
         e.click();
     }
 
-    public static boolean isElementVisible(WebDriver driver, By by) {
+    public boolean isElementVisible(WebDriver driver, By by) {
         waitUntilVisible(driver, by);
         return driver.findElements(by).size() > 0;
     }
 
-    public static String getElementValue(WebDriver driver, By by) {
+    public String getElementValue(WebDriver driver, By by) {
         waitUntilVisible(driver, by);
         return driver.findElement(by).getText();
     }
 
-    public static void waitForRefresh(WebDriver driver, By by) {
+    public void waitForRefresh(WebDriver driver, By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
     }
