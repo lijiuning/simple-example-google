@@ -86,4 +86,8 @@ public class PageObject {
         WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
     }
+
+    public boolean isElementPresent(WebDriver driver, By by) {
+        return !driver.findElements(by).isEmpty();
+    }
 }

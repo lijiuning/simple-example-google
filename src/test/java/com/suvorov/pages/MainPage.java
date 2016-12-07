@@ -1,6 +1,5 @@
 package com.suvorov.pages;
 
-import com.suvorov.helpers.CommonlyUsedScenario;
 import com.suvorov.helpers.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +36,14 @@ public class MainPage extends PageObject {
     }
 
     public int getMailsQty(WebDriver driver) {
-        waitForRefresh(driver, By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]"));
-        return Integer.parseInt(driver.findElement(By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]")).getText());
+        int qty;
+        By by = By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]");
+        if (isElementPresent(driver, by)) {
+            waitForRefresh(driver, by);
+            qty = Integer.parseInt(driver.findElement(By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]")).getText());
+        } else {
+            qty = 0;
+        }
+        return qty;
     }
 }
