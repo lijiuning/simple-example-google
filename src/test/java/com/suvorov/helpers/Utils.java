@@ -22,7 +22,7 @@ public class Utils {
         return PageFactory.initElements(driver, LoginPage.class);
     }
 
-    private static void waitUntilVisible(WebDriver driver, By by) {
+    public static void waitUntilVisible(WebDriver driver, By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }

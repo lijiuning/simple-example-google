@@ -43,18 +43,32 @@ public class gmailTest {
     @Category({MediumPriority.class})
     @Test
     public void sendEmail() {
+
+        //login and check quantity of mails in box
         MainPage mainPage = loginToGmail();
+        int mailsQty = mainPage.getMailsQty(driver);
+
+        //compose and send a new message
         NewMailPage newMailPage = mainPage.clickComposeBtn(driver);
         newMailPage.typeReceipient(driver, "vsautotesting@gmail.com");
         String expectedSubj = newMailPage.typeRandomSubject(driver, 50);
         String expectedBody = newMailPage.typeRandomEmailBody(driver, 350);
         mainPage = newMailPage.clickSendBtn(driver);
-        InboxPage inboxPage = mainPage.clickInboxFolder(driver);
+
+        //click Inbox button until we get new message
+        InboxPage inboxPage;
+        int newMailsQty;
+        do {
+            inboxPage = mainPage.clickInboxFolder(driver);
+            newMailsQty = mainPage.getMailsQty(driver);
+        } while (newMailsQty == mailsQty);
+
+        //check the details of new message
         EmailDetailsPage emailDetailsPage = inboxPage.clickTopNewMail(driver);
         String actualSubj=emailDetailsPage.getEmailActualSubject(driver);
         String actualBody=emailDetailsPage.getEmailActualBody(driver);
-        Assert.assertEquals("Email should have our subject typed before", expectedSubj, actualSubj);
-        Assert.assertEquals("Email should have our body typed before", expectedBody, actualBody);
+        Assert.assertEquals("Email should have a subject typed before", expectedSubj, actualSubj);
+        Assert.assertEquals("Email should have a body message typed before", expectedBody, actualBody);
     }
 
     @Category({MediumPriority.class})

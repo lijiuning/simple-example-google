@@ -4,8 +4,6 @@ import com.suvorov.helpers.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by vsuvorov on 12/5/16.
@@ -35,5 +33,10 @@ public class MainPage {
     public LoginPage clickLogOutBtn(WebDriver driver) {
         Utils.clickElement(driver, By.cssSelector("a[href*='Logout']"));
         return PageFactory.initElements(driver, LoginPage.class);
+    }
+
+    public int getMailsQty(WebDriver driver) {
+        Utils.waitUntilVisible(driver, By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]"));
+        return Integer.parseInt(driver.findElement(By.xpath("//div[@role]/span[@class='Dj'][1]/span[3]")).getText());
     }
 }
