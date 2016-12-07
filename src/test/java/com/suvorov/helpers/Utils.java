@@ -89,4 +89,9 @@ public class Utils {
         waitUntilVisible(driver, by);
         return driver.findElement(by).getText();
     }
+
+    public static void waitForRefresh(WebDriver driver, By by) {
+        WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
+    }
 }

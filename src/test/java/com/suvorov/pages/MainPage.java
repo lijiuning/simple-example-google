@@ -1,10 +1,11 @@
 package com.suvorov.pages;
 
-//import com.sun.org.apache.xpath.internal.operations.String;
 import com.suvorov.helpers.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by vsuvorov on 12/5/16.
@@ -16,28 +17,14 @@ public class MainPage {
         return Utils.isElementVisible(driver, By.cssSelector("div[role='button'][gh='cm']"));
     }
 
-    public void clickComposeBtn(WebDriver driver) {
+    public NewMailPage clickComposeBtn(WebDriver driver) {
         Utils.clickElement(driver, By.cssSelector("div[role='button'][gh='cm']"));
-    }
-
-    public void typeReceipient(WebDriver driver, String s) {
-        Utils.setTextBoxValue(driver, By.name("to"), s);
-    }
-
-    public String typeRandomSubject(WebDriver driver, int maxStringLength) {
-        return Utils.setRandomTextBoxValue(driver, By.name("subjectbox"), maxStringLength);
-    }
-
-    public String typeRandomEmailBody(WebDriver driver, int maxStringLength) {
-        return Utils.setRandomTextBoxValue(driver, By.cssSelector("div[aria-label='Message Body']"), maxStringLength);
-    }
-
-    public void clickSendBtn(WebDriver driver) {
-        Utils.clickElement(driver, By.cssSelector("div[aria-label*='Send'"));
+        return PageFactory.initElements(driver, NewMailPage.class);
     }
 
     public InboxPage clickInboxFolder(WebDriver driver) {
-        Utils.clickElement(driver, By.xpath("//div[@role='navigation']/div/div/div/div/div")); //a[contains(@title,'Inbox')]"));
+        Utils.waitForRefresh(driver, By.xpath("//a[contains(@title,'Inbox')]"));
+        Utils.clickElement(driver, By.xpath("//a[contains(@title,'Inbox')]"));
         return PageFactory.initElements(driver, InboxPage.class);
     }
 

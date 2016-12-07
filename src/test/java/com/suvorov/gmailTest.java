@@ -3,10 +3,7 @@ package com.suvorov;
 import com.suvorov.categories.HighPriority;
 import com.suvorov.categories.MediumPriority;
 import com.suvorov.helpers.Utils;
-import com.suvorov.pages.EmailDetailsPage;
-import com.suvorov.pages.InboxPage;
-import com.suvorov.pages.LoginPage;
-import com.suvorov.pages.MainPage;
+import com.suvorov.pages.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +11,8 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by vsuvorov on 12/5/16.
@@ -28,7 +27,7 @@ public class gmailTest {
         System.setProperty("webdriver.gecko.driver",
                 "/Users/vsuvorov/Documents/Development/MozillaGeckoDriver/geckodriver");
         if (browserName != null && browserName.equalsIgnoreCase("Chrome")) {
-//            driver = new ChromeDriver();
+            //driver = new ChromeDriver();
         } else {
             driver = new FirefoxDriver();
         }
@@ -45,11 +44,11 @@ public class gmailTest {
     @Test
     public void sendEmail() {
         MainPage mainPage = loginToGmail();
-        mainPage.clickComposeBtn(driver);
-        mainPage.typeReceipient(driver, "vsautotesting@gmail.com");
-        String expectedSubj = mainPage.typeRandomSubject(driver, 50);
-        String expectedBody = mainPage.typeRandomEmailBody(driver, 350);
-        mainPage.clickSendBtn(driver);
+        NewMailPage newMailPage = mainPage.clickComposeBtn(driver);
+        newMailPage.typeReceipient(driver, "vsautotesting@gmail.com");
+        String expectedSubj = newMailPage.typeRandomSubject(driver, 50);
+        String expectedBody = newMailPage.typeRandomEmailBody(driver, 350);
+        mainPage = newMailPage.clickSendBtn(driver);
         InboxPage inboxPage = mainPage.clickInboxFolder(driver);
         EmailDetailsPage emailDetailsPage = inboxPage.clickTopNewMail(driver);
         String actualSubj=emailDetailsPage.getEmailActualSubject(driver);
