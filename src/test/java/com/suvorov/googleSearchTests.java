@@ -21,8 +21,7 @@ public class googleSearchTests {
     @Before
     public void setDriver() {
         String browserName = System.getenv("browser");
-        System.setProperty("webdriver.gecko.driver",
-                "/Users/vsuvorov/Documents/Programming/MozillaGeckoDriver/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "./repo/MozillaGeckoDriver/geckodriver");
         if (browserName != null && browserName.equalsIgnoreCase("Chrome")) {
             //driver = new ChromeDriver();
         } else {

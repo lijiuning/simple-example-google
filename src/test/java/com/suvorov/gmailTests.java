@@ -22,8 +22,7 @@ public class gmailTests {
     @Before
     public void setDriver() {
         String browserName = System.getenv("browser");
-        System.setProperty("webdriver.gecko.driver",
-                "/Users/vsuvorov/Documents/Programming/MozillaGeckoDriver/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "./repo/MozillaGeckoDriver/geckodriver");
         if (browserName != null && browserName.equalsIgnoreCase("Chrome")) {
             //driver = new ChromeDriver();
         } else {
@@ -31,14 +30,14 @@ public class gmailTests {
         }
     }
 
-    @Category({HighPriority.class})
+    @Category({MediumPriority.class})
     @Test
     public void gmailLogin() {
         MainPage mainPage = CommonlyUsedScenario.loginToGmail(driver);
         Assert.assertTrue("User should be logged in now", mainPage.isUserLoggedIn(driver));
     }
 
-    @Category({MediumPriority.class})
+    @Category({HighPriority.class})
     @Test
     public void sendEmail() {
 
