@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by vsuvorov on 12/5/16.
  */
-public class gmailSuite {
+public class gmailTests {
 
     WebDriver driver;
 
@@ -23,7 +23,7 @@ public class gmailSuite {
     public void setDriver() {
         String browserName = System.getenv("browser");
         System.setProperty("webdriver.gecko.driver",
-                "/Users/vsuvorov/Documents/Development/MozillaGeckoDriver/geckodriver");
+                "/Users/vsuvorov/Documents/Programming/MozillaGeckoDriver/geckodriver");
         if (browserName != null && browserName.equalsIgnoreCase("Chrome")) {
             //driver = new ChromeDriver();
         } else {
