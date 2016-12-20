@@ -1,6 +1,7 @@
 package com.suvorov.helpers;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ import java.util.Random;
  */
 public class PageObject {
     private final int TIME_OUT_IN_SECONDS = 15;
+    private final int MAX_STALE_ELEMENT_RETRIES = 5;
 
     public void waitUntilVisible(WebDriver driver, By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
@@ -90,4 +92,25 @@ public class PageObject {
     public boolean isElementPresent(WebDriver driver, By by) {
         return !driver.findElements(by).isEmpty();
     }
+
+    //this method is usefule to get rid of stale element reference exeception
+    public void dependableClick(WebDriver driver, By by) {
+        WebDriverWait wait = new WebDriverWait(driver, TIME_OUT_IN_SECONDS);
+        int tries = 0;
+        while (true) {
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+                wait.until(ExpectedConditions.elementToBeClickable(by)).click();
+                return;
+            } catch (StaleElementReferenceException e) {
+                if (tries < MAX_STALE_ELEMENT_RETRIES) {
+                    tries++;
+                    continue;
+                } else {
+                    throw e;
+                }
+            }
+        }
+    }
+
 }
