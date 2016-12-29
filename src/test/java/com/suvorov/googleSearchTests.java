@@ -4,6 +4,7 @@ import com.suvorov.categories.HighPriority;
 import com.suvorov.helpers.CommonlyUsedScenario;
 import com.suvorov.pages.GoogleInitPage;
 import com.suvorov.pages.GoogleResultPage;
+import com.suvorov.selenium.DriverFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,13 +21,7 @@ public class googleSearchTests {
 
     @Before
     public void setDriver() {
-        String browserName = System.getenv("browser");
-        System.setProperty("webdriver.gecko.driver", "./repo/MozillaGeckoDriver/geckodriver");
-        if (browserName != null && browserName.equalsIgnoreCase("Chrome")) {
-            //driver = new ChromeDriver();
-        } else {
-            driver = new FirefoxDriver();
-        }
+        driver = new DriverFactory().setDriver("firefox");
     }
 
     @Category({HighPriority.class})

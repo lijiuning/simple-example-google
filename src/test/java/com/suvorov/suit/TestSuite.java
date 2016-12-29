@@ -1,5 +1,7 @@
-package com.suvorov;
+package com.suvorov.suit;
 
+import com.suvorov.gmailTests;
+import com.suvorov.googleSearchTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
