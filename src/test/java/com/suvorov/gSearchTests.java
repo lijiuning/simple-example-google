@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by vsuvorov on 12/6/16.
  */
-public class googleSearchTests {
+public class gSearchTests {
     WebDriver driver;
 
     @Before
