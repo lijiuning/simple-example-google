@@ -1,8 +1,8 @@
 package com.suvorov.suit;
 
-import com.suvorov.gMailTests;
-import com.suvorov.gMapsDistanceMatrixTests;
-import com.suvorov.gSearchTests;
+import com.suvorov.tests.web.gMailTests;
+import com.suvorov.tests.api.gMapsDistanceMatrixTests;
+import com.suvorov.tests.web.gSearchTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

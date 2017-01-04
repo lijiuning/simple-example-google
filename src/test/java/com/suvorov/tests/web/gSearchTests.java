@@ -1,4 +1,4 @@
-package com.suvorov;
+package com.suvorov.tests.web;
 
 import com.suvorov.categories.HighPriority;
 import com.suvorov.helpers.CommonlyUsedScenario;
