@@ -1,7 +1,7 @@
 package com.suvorov.suit;
 
 import com.suvorov.tests.web.gMailTests;
-import com.suvorov.tests.api.gMapsDistanceMatrixTests;
+import com.suvorov.tests.api.gMapsDistanceMatrixJsonTests;
 import com.suvorov.tests.web.gSearchTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -14,6 +14,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         gSearchTests.class,
         gMailTests.class,
-        gMapsDistanceMatrixTests.class
+        gMapsDistanceMatrixJsonTests.class
 })
 public class TestSuite {}
