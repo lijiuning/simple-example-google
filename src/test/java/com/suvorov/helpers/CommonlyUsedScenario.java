@@ -1,5 +1,6 @@
 package com.suvorov.helpers;
 
+import com.suvorov.pages.BaiduInitPage;
 import com.suvorov.pages.GoogleInitPage;
 import com.suvorov.pages.LoginPage;
 import com.suvorov.pages.MainPage;
@@ -23,5 +24,10 @@ public class CommonlyUsedScenario {
     public static GoogleInitPage openGoogle(WebDriver driver) {
         driver.get("http://google.com");
         return PageFactory.initElements(driver, GoogleInitPage.class);
+    }
+
+    public static BaiduInitPage openBaidu(WebDriver driver) {
+        driver.get("http://baidu.com");
+        return PageFactory.initElements(driver, BaiduInitPage.class);
     }
 }

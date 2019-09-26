@@ -36,7 +36,7 @@ public class DriverFactory {
             System.setProperty(propertyName, pathToDriver + driverFile);
             driver.set(new FirefoxDriver());
         } else if (browser.equals("chrome")) {
-            pathToDriver = "repo" + File.separator + "<folder of chrome driver>" + File.separator;
+            pathToDriver = "repo" + File.separator + "ChromeDriver" + File.separator;
             propertyName = "webdriver.chrome.driver";
             driverFile = (osName.equals("windows") ? "chromedriver.exe" : "chromedriver");
 
